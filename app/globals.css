@@ -4,8 +4,8 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 239, 242, 255;
+  --background-end-rgb: 229, 212, 255;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,7 +19,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
+      to right,
       transparent,
       rgb(var(--background-end-rgb))
     )
@@ -29,5 +29,22 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@media(max-width: 1100px) {
+  .small-restricted {
+    display: block;
+  }
+  .big-restricted {
+    display: none;
+  }
+}
+@media(min-width: 1100px) {
+  .small-restricted {
+    display: none;
+  }
+  .big-restricted {
+    display: block;
   }
 }
