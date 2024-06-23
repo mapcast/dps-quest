@@ -11,7 +11,7 @@ export default function QuestList() {
   return (
     <div className="sm:ml-64 quest-grid">
       {createMode ? 
-      <QuestRegisterPage/> : <QuestListPage/>}
+      <QuestRegisterPage setCreateMode={setCreateMode}/> : <QuestListPage/>}
       
       
       <div style={{position: 'absolute', bottom: 20, right: 20}}>

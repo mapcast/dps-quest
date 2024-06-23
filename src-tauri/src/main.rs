@@ -2,12 +2,12 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 //use util::{check_main_password_is_exist, save_main_password, check_main_password, get_password_names, get_password, save_password, delete_password};
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 use tauri::{api::Result, CustomMenuItem, SystemTrayMenu, SystemTrayMenuItem, SystemTray, SystemTrayEvent, Manager};
 mod util;
-use util::{get_quest_list};
+use util::{get_quest_list, save_quest};
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Quest {
   id: String,
   title: String,
@@ -17,10 +17,7 @@ pub struct Quest {
   reward: String
 }
 
-#[tauri::command]
-async fn check_main(sva: String) -> bool {
-  true
-}
+
 
 
 fn main() {
@@ -62,6 +59,7 @@ fn main() {
       _ => {}
     })
     .invoke_handler(tauri::generate_handler![
+      add_quest,
       load_quest_list
     ])
     .on_window_event(|event| match event.event() {
@@ -73,6 +71,11 @@ fn main() {
     })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
+}
+
+#[tauri::command]
+async fn add_quest(quest: String) -> bool {
+  save_quest(quest)
 }
 
 #[tauri::command]
